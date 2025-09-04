@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: crypto-tracker-backend
+    env: node
+    plan: free
+    buildCommand: pnpm install --frozen-lockfile && pnpm build:clean
+    startCommand: pnpm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3001
+      - key: WS_PORT
+        value: 3002
+      - key: FRONTEND_URL
+        value: https://your-vercel-app.vercel.app

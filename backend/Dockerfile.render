@@ -16,8 +16,8 @@ RUN pnpm install --frozen-lockfile
 # Copy source code
 COPY . .
 
-# Build the application (TypeScript compilation)
-RUN pnpm build:clean
+# Install tsx globally for running TypeScript directly
+RUN npm install -g tsx
 
 # Expose ports
 EXPOSE 3001 3002
@@ -26,5 +26,5 @@ EXPOSE 3001 3002
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
   CMD wget --no-verbose --tries=1 --spider http://localhost:3001/health || exit 1
 
-# Start the application
-CMD ["pnpm", "start"]
+# Start the application directly with tsx
+CMD ["tsx", "src/server.ts"]

@@ -5,12 +5,15 @@
   "main": "dist/server.js",
   "type": "module",
   "scripts": {
-    "start": "node dist/server.js",
+    "start": "tsx src/server.ts",
+    "start:prod": "node dist/server.js",
     "dev": "nodemon --exec tsx src/server.ts",
     "build": "tsc",
     "build:clean": "rm -rf dist && tsc",
     "type-check": "tsc --noEmit",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "render:build": "pnpm install --frozen-lockfile",
+    "render:start": "tsx src/server.ts"
   },
   "keywords": [],
   "author": "",
@@ -32,6 +35,7 @@
     "dotenv": "^17.2.2",
     "express": "^5.1.0",
     "playwright": "^1.55.0",
+    "tsx": "^4.20.5",
     "ws": "^8.18.3"
   }
 }

@@ -14,7 +14,7 @@ const POPULAR_CRYPTO_TICKERS = [
 
 const app = express();
 const PORT = process.env.PORT || 3001;
-const WS_PORT = parseInt(process.env.WS_PORT || '3002', 10);
+const WS_PORT = parseInt(process.env.WS_PORT || process.env.PORT || '3002', 10);
 
 // Middleware
 app.use(cors({
@@ -219,11 +219,11 @@ app.get('/api/tickers', (req, res) => {
 app.get('/api/websocket', (req, res) => {
   const wsProtocol = process.env.NODE_ENV === 'production' ? 'wss' : 'ws';
   const wsHost = process.env.NODE_ENV === 'production' 
-    ? process.env.RAILWAY_PUBLIC_DOMAIN || 'localhost'
+    ? (process.env.RAILWAY_PUBLIC_DOMAIN || process.env.RENDER_EXTERNAL_URL?.replace('https://', '') || 'localhost')
     : 'localhost';
   
   res.json({
-    url: `${wsProtocol}://${wsHost}:${WS_PORT}`,
+    url: `${wsProtocol}://${wsHost}`,
     port: WS_PORT,
     clients: priceStreamer.getClientCount(),
     streaming: priceStreamer.isStreamingActive()
