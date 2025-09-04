@@ -21,6 +21,6 @@
     }
   ],
   "installCommand": "pnpm install --recursive",
-  "buildCommand": "pnpm build:all",
+  "buildCommand": "pnpm --filter frontend build",
   "outputDirectory": "frontend/.next"
 }
