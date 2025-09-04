@@ -14,7 +14,7 @@ export class TradingViewScraper {
     
     try {
     this.browser = await chromium.launch({
-        headless: false, // MUST be false for headed mode requirement
+        headless: true, // MUST be false for headed mode requirement
         args: [
           '--no-sandbox',
           '--disable-setuid-sandbox',
