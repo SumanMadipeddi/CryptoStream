@@ -20,10 +20,9 @@ const WS_PORT = parseInt(process.env.WS_PORT || '3002', 10);
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
     ? [
-        'http://localhost:3000',
-        'https://your-frontend-app.vercel.app', // Replace with your actual Vercel URL
-        /\.vercel\.app$/, // Allow all Vercel preview deployments
-        /\.railway\.app$/ // Allow Railway preview deployments
+        process.env.FRONTEND_URL || 'https://crypto-tracker-frontend.vercel.app',
+        'https://crypto-tracker-frontend.vercel.app',
+        'https://crypto-tracker.vercel.app'
       ] 
     : true,
   credentials: true
@@ -218,8 +217,13 @@ app.get('/api/tickers', (req, res) => {
 
 // Get WebSocket connection info
 app.get('/api/websocket', (req, res) => {
+  const wsProtocol = process.env.NODE_ENV === 'production' ? 'wss' : 'ws';
+  const wsHost = process.env.NODE_ENV === 'production' 
+    ? process.env.RAILWAY_PUBLIC_DOMAIN || 'localhost'
+    : 'localhost';
+  
   res.json({
-    url: `ws://localhost:${WS_PORT}`,
+    url: `${wsProtocol}://${wsHost}:${WS_PORT}`,
     port: WS_PORT,
     clients: priceStreamer.getClientCount(),
     streaming: priceStreamer.isStreamingActive()

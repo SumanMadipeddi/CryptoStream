@@ -17,7 +17,10 @@
     "build:all": "pnpm build:backend && pnpm build",
     "clean": "rm -rf node_modules frontend/node_modules backend/node_modules",
     "lint": "pnpm --filter frontend lint",
-    "type-check": "pnpm --filter frontend type-check && pnpm --filter backend type-check"
+    "type-check": "pnpm --filter frontend type-check && pnpm --filter backend type-check",
+    "deploy:prepare": "pnpm install:all && pnpm build:all",
+    "deploy:backend": "cd backend && pnpm build",
+    "deploy:frontend": "cd frontend && pnpm build"
   },
   "devDependencies": {
     "@types/express": "^5.0.3",

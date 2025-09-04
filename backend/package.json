@@ -2,17 +2,15 @@
   "name": "crypto-price-tracker-backend",
   "version": "1.0.0",
   "description": "Real-time cryptocurrency price tracking backend with TradingView scraping",
-  "main": "src/server.ts",
+  "main": "dist/server.js",
   "type": "module",
   "scripts": {
-    "start": "tsx src/server.ts",
+    "start": "node dist/server.js",
     "dev": "nodemon --exec tsx src/server.ts",
     "build": "tsc",
+    "build:clean": "rm -rf dist && tsc",
     "type-check": "tsc --noEmit",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "pnpm exec playwright install chromium --with-deps",
-    "railway:build": "pnpm build && pnpm exec playwright install chromium --with-deps",
-    "railway:start": "pnpm start"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
@@ -27,7 +25,7 @@
   "dependencies": {
     "@connectrpc/connect": "^2.1.0",
     "@connectrpc/connect-node": "^2.1.0",
-    "@connectrpc/protoc-gen-connect-es": "^2.1.0",
+    "@connectrpc/protoc-gen-connect-es": "^1.6.1",
     "@types/cors": "^2.8.19",
     "@types/ws": "^8.18.1",
     "cors": "^2.8.5",
@@ -35,9 +33,5 @@
     "express": "^5.1.0",
     "playwright": "^1.55.0",
     "ws": "^8.18.3"
-  },
-  "engines": {
-    "node": ">=18.0.0",
-    "pnpm": ">=8.0.0"
   }
 }

@@ -1,60 +1,17 @@
-FROM node:20-slim
-
-# Install system dependencies for Playwright
-RUN apt-get update && apt-get install -y \
-    wget \
-    gnupg \
-    ca-certificates \
-    procps \
-    libxss1 \
-    libgconf-2-4 \
-    libxrandr2 \
-    libasound2 \
-    libpangocairo-1.0-0 \
-    libatk1.0-0 \
-    libcairo-gobject2 \
-    libgtk-3-0 \
-    libgdk-pixbuf2.0-0 \
-    libxcomposite1 \
-    libxcursor1 \
-    libxdamage1 \
-    libxext6 \
-    libxfixes3 \
-    libxi6 \
-    libxrender1 \
-    libxtst6 \
-    libnss3 \
-    libcups2 \
-    fonts-liberation \
-    libappindicator3-1 \
-    libasound2 \
-    libatk-bridge2.0-0 \
-    libdrm2 \
-    libgtk-3-0 \
-    libnspr4 \
-    libnss3 \
-    libx11-xcb1 \
-    libxcomposite1 \
-    libxdamage1 \
-    libxrandr2 \
-    xdg-utils \
-    && rm -rf /var/lib/apt/lists/*
+# Use Node.js 18 Alpine as base image
+FROM node:18-alpine
 
 # Set working directory
 WORKDIR /app
 
-# Copy package files
-COPY package.json ./
-COPY ../../pnpm-lock.yaml ./
-
 # Install pnpm
-RUN npm install -g pnpm
+RUN npm install -g pnpm@10.15.1
+
+# Copy package files
+COPY package.json pnpm-lock.yaml ./
 
 # Install dependencies
 RUN pnpm install --frozen-lockfile
-
-# Install Playwright browsers with system dependencies
-RUN pnpm exec playwright install chromium --with-deps
 
 # Copy source code
 COPY . .
@@ -62,8 +19,12 @@ COPY . .
 # Build the application
 RUN pnpm build
 
-# Expose port
-EXPOSE 3001
+# Expose ports
+EXPOSE 3001 3002
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:3001/health || exit 1
 
 # Start the application
 CMD ["pnpm", "start"]

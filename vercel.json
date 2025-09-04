@@ -6,10 +6,16 @@
       "use": "@vercel/next"
     }
   ],
-  "installCommand": "pnpm install --recursive",
-  "buildCommand": "pnpm --filter frontend build",
+  "installCommand": "cd frontend && pnpm install",
+  "buildCommand": "cd frontend && pnpm build",
+  "outputDirectory": "frontend/.next",
   "env": {
     "NEXT_PUBLIC_API_URL": "@api_url",
     "NEXT_PUBLIC_WS_URL": "@ws_url"
+  },
+  "functions": {
+    "frontend/app/**": {
+      "maxDuration": 30
+    }
   }
 }
