@@ -10,11 +10,11 @@ export class TradingViewScraper {
   private readonly PRICE_CACHE_DURATION = 200; // Cache prices for 200ms
 
   async initialize(): Promise<void> {
-    console.log('🚀 Initializing Playwright browser in headed mode...');
+    console.log('🚀 Initializing Playwright browser...');
     
     try {
     this.browser = await chromium.launch({
-        headless: true, // MUST be false for headed mode requirement
+        headless: true, // Railway requires headless mode
         args: [
           '--no-sandbox',
           '--disable-setuid-sandbox',
@@ -27,7 +27,19 @@ export class TradingViewScraper {
           '--disable-features=VizDisplayCompositor',
           '--disable-background-timer-throttling',
           '--disable-backgrounding-occluded-windows',
-          '--disable-renderer-backgrounding'
+          '--disable-renderer-backgrounding',
+          '--single-process', // Railway optimization
+          '--disable-background-networking',
+          '--disable-default-apps',
+          '--disable-extensions',
+          '--disable-sync',
+          '--disable-translate',
+          '--hide-scrollbars',
+          '--metrics-recording-only',
+          '--mute-audio',
+          '--no-default-browser-check',
+          '--safebrowsing-disable-auto-update',
+          '--disable-ipc-flooding-protection'
         ]
     });
     
