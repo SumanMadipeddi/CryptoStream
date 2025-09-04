@@ -1,0 +1,44 @@
+{
+  "name": "crypto-price-tracker",
+  "version": "1.0.0",
+  "description": "Real-time cryptocurrency price tracking application - Project Pluto Assessment",
+  "private": true,
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "packageManager": "pnpm@10.15.1",
+  "scripts": {
+    "install:all": "pnpm install --recursive",
+    "dev": "concurrently --kill-others-on-fail \"pnpm --filter backend dev\" \"pnpm --filter frontend dev\"",
+    "start": "concurrently --kill-others-on-fail \"pnpm --filter backend start\" \"pnpm --filter frontend start\"",
+    "build": "pnpm --filter frontend build",
+    "build:backend": "pnpm --filter backend build",
+    "build:all": "pnpm build:backend && pnpm build",
+    "clean": "rm -rf node_modules frontend/node_modules backend/node_modules",
+    "lint": "pnpm --filter frontend lint",
+    "type-check": "pnpm --filter frontend type-check && pnpm --filter backend type-check"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "concurrently": "^8.2.2"
+  },
+  "keywords": [
+    "cryptocurrency",
+    "price-tracking",
+    "real-time",
+    "tradingview",
+    "playwright",
+    "websocket",
+    "nextjs",
+    "typescript",
+    "fullstack",
+    "assessment"
+  ],
+  "author": "Suman Madipeddi",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/projectpluto/fullstack-coding-assessment"
+  }
+}
