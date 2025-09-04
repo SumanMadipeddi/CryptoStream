@@ -7,5 +7,9 @@
     }
   ],
   "installCommand": "pnpm install --recursive",
-  "buildCommand": "pnpm --filter frontend build"
+  "buildCommand": "pnpm --filter frontend build",
+  "env": {
+    "NEXT_PUBLIC_API_URL": "@api_url",
+    "NEXT_PUBLIC_WS_URL": "@ws_url"
+  }
 }

@@ -80,7 +80,8 @@ export function useWebSocket(options: UseWebSocketOptions) {
     setConnectionState(prev => ({ ...prev, isConnecting: true, lastError: null }));
 
     try {
-      wsRef.current = new WebSocket('ws://localhost:3002');
+      const wsUrl = process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:3002';
+      wsRef.current = new WebSocket(wsUrl);
       
       wsRef.current.onopen = () => {
         console.log('✅ WebSocket connected');

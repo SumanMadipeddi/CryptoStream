@@ -19,7 +19,12 @@ const WS_PORT = parseInt(process.env.WS_PORT || '3002', 10);
 // Middleware
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
-    ? ['http://localhost:3000'] 
+    ? [
+        'http://localhost:3000',
+        'https://your-frontend-app.vercel.app', // Replace with your actual Vercel URL
+        /\.vercel\.app$/, // Allow all Vercel preview deployments
+        /\.railway\.app$/ // Allow Railway preview deployments
+      ] 
     : true,
   credentials: true
 }));

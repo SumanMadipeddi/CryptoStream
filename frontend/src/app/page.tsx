@@ -111,7 +111,8 @@ export default function Home() {
 
     setIsLoading(true);
     try {
-      const response = await fetch('http://localhost:3001/api/tickers', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+      const response = await fetch(`${apiUrl}/api/tickers`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ticker: ticker.toUpperCase().trim() })
@@ -143,7 +144,8 @@ export default function Home() {
   const removeTicker = async (ticker: string) => {
     setIsLoading(true);
     try {
-      const response = await fetch(`http://localhost:3001/api/tickers/${ticker}`, {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+      const response = await fetch(`${apiUrl}/api/tickers/${ticker}`, {
         method: 'DELETE'
       });
       

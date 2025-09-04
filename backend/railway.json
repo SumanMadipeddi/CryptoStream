@@ -1,11 +1,12 @@
 {
   "build": {
-    "builder": "NIXPACKS"
+    "builder": "NIXPACKS",
+    "buildCommand": "pnpm railway:build"
   },
   "deploy": {
-    "startCommand": "pnpm exec playwright install chromium && pnpm start",
+    "startCommand": "pnpm railway:start",
     "healthcheckPath": "/health",
-    "healthcheckTimeout": 100,
+    "healthcheckTimeout": 300,
     "restartPolicyType": "ON_FAILURE",
     "restartPolicyMaxRetries": 10
   }
