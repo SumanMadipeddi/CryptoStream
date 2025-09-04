@@ -25,7 +25,7 @@ const nextConfig: NextConfig = {
   },
   
   // Output configuration for better performance
-  output: 'standalone',
+  // output: 'standalone', // Commented out for Vercel compatibility
   
   // Image optimization
   images: {
