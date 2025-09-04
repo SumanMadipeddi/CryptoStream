@@ -4,15 +4,23 @@
     {
       "src": "frontend/package.json",
       "use": "@vercel/next"
+    },
+    {
+      "src": "backend/src/server.ts",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "backend/src/server.ts"
+    },
     {
       "src": "/(.*)",
       "dest": "frontend/$1"
     }
   ],
   "installCommand": "pnpm install --recursive",
-  "buildCommand": "pnpm --filter frontend build",
+  "buildCommand": "pnpm build:all",
   "outputDirectory": "frontend/.next"
 }
