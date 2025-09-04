@@ -3,13 +3,9 @@
   "builds": [
     {
       "src": "frontend/package.json",
-      "use": "@vercel/next",
-      "config": {
-        "distDir": ".next"
-      }
+      "use": "@vercel/next"
     }
   ],
   "installCommand": "pnpm install --recursive",
-  "buildCommand": "cd frontend && pnpm build",
-  "outputDirectory": "frontend/.next"
+  "buildCommand": "pnpm --filter frontend build"
 }
