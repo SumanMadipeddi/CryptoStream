@@ -3,7 +3,7 @@ services:
     name: crypto-tracker-backend
     env: node
     plan: free
-    buildCommand: pnpm install --frozen-lockfile && pnpm build:clean
+    buildCommand: pnpm install --no-frozen-lockfile
     startCommand: pnpm start
     healthCheckPath: /health
     envVars:

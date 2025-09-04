@@ -73,15 +73,20 @@ NEXT_PUBLIC_WS_URL=wss://your-app-name.onrender.com
 
 ### Common Issues
 
-1. **Build Failures**: 
-   - Use `Dockerfile.render` for simpler deployment
+1. **Lockfile Mismatch Error**: 
+   - Use `Dockerfile.simple` which doesn't rely on lockfile
+   - Or use `--no-frozen-lockfile` in build commands
+   - Run `pnpm install` locally to update lockfile
+
+2. **Build Failures**: 
+   - Use `Dockerfile.simple` for simplest deployment
    - Check that all dependencies are in `dependencies` not `devDependencies`
 
-2. **WebSocket Issues**:
+3. **WebSocket Issues**:
    - Ensure WebSocket support is enabled in Render
    - Use `wss://` (secure) protocol in production
 
-3. **CORS Errors**:
+4. **CORS Errors**:
    - Make sure `FRONTEND_URL` matches your Vercel URL exactly
 
 ### Render-Specific Notes
